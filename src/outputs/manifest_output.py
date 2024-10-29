@@ -171,9 +171,14 @@ class Manifest:
                     File size is too big"""
             )
 
+        # Remove leading slashes from the relative file path
+        relative_file_str = str(relative_file_path)
+        while relative_file_str.startswith("/"):
+            relative_file_str = relative_file_str[1:]
+
         file_manifest = {
             "file": os.path.basename(relative_file_path),
-            "subfolder": os.path.dirname(relative_file_path),
+            "subfolder": relative_file_str,
             "sizeBytes": file_size_bytes,
             "md5sum": self.md5sum(absolute_file_path),
             "header": column_header,
