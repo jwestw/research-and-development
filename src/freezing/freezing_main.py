@@ -41,9 +41,7 @@ def run_freezing(
     """
 
     # read in validated config settings
-    run_with_snapshot_and_freeze = config["global"][
-        "run_with_snapshot_and_freeze"
-    ]
+    run_with_snapshot_and_freeze = config["global"]["run_with_snapshot_and_freeze"]
     load_updated_snapshot_for_comparison = config["global"][
         "load_updated_snapshot_for_comparison"
     ]
@@ -94,7 +92,7 @@ def run_freezing(
         ]
         FreezingLogger.info("Outputting frozen data file.")
         tdate = datetime.now().strftime("%y-%m-%d")
-        survey_year = config["years"]["survey_year"]
+        survey_year = config["survey"]["survey_year"]
         filename = (
             f"{survey_year}_FROZEN_staged_BERD_full_responses_{tdate}_v{run_id}.csv"
         )

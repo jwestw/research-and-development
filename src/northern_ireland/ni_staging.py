@@ -100,7 +100,7 @@ def run_ni_staging(
         NIStagingLogger.info("Starting output of staged NI data...")
         staging_folder = config["ni_paths"]["ni_staging_output_path"]
         tdate = datetime.now().strftime("%y-%m-%d")
-        survey_year = config["years"]["survey_year"]
+        survey_year = config["survey"]["survey_year"]
         staged_filename = (
             f"{survey_year}_staged_NI_full_responses_{tdate}_v{run_id}.csv"
         )

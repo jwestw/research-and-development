@@ -29,13 +29,65 @@ def get_amendments(
     )
     key_cols = ["reference", "period", "instance"]
     numeric_cols = [
-        "202", "203", "204", "205", "206", "207", "209", "210",
-        "211", "212", "214", "216", "218", "219", "220", "221", "222",
-        "223", "225", "226", "227", "228", "229", "237", "242", "243",
-        "244", "245", "246", "247", "248", "249", "250", "405", "406",
-        "407", "408", "409", "410", "411", "412", "501", "502", "503",
-        "504", "505", "506", "507", "508", "602", "701", "702", "703",
-        "704", "705", "706", "707", "709", "711",
+        "202",
+        "203",
+        "204",
+        "205",
+        "206",
+        "207",
+        "209",
+        "210",
+        "211",
+        "212",
+        "214",
+        "216",
+        "218",
+        "219",
+        "220",
+        "221",
+        "222",
+        "223",
+        "225",
+        "226",
+        "227",
+        "228",
+        "229",
+        "237",
+        "242",
+        "243",
+        "244",
+        "245",
+        "246",
+        "247",
+        "248",
+        "249",
+        "250",
+        "405",
+        "406",
+        "407",
+        "408",
+        "409",
+        "410",
+        "411",
+        "412",
+        "501",
+        "502",
+        "503",
+        "504",
+        "505",
+        "506",
+        "507",
+        "508",
+        "602",
+        "701",
+        "702",
+        "703",
+        "704",
+        "705",
+        "706",
+        "707",
+        "709",
+        "711",
     ]
 
     non_numeric_cols = [
@@ -43,9 +95,9 @@ def get_amendments(
         "201",
         "601",
     ]
-    numeric_cols_new = [f"{i}_updated" for i in numeric_cols]
+    # numeric_cols_new = [f"{i}_updated" for i in numeric_cols]
     numeric_cols_diff = [f"{i}_diff" for i in numeric_cols]
-    non_numeric_cols_new = [f"{i}_updated" for i in non_numeric_cols]
+    # non_numeric_cols_new = [f"{i}_updated" for i in non_numeric_cols]
     non_numeric_cols_diff = [f"{i}_diff" for i in non_numeric_cols]
 
     # Inner join on keys to select only records present in both snapshots
@@ -189,7 +241,7 @@ def output_freezing_files(
     ]
     FreezingLogger.info("Outputting changes to review file(s).")
     tdate = datetime.now().strftime("%y-%m-%d")
-    survey_year = config["years"]["survey_year"]
+    survey_year = config["survey"]["survey_year"]
 
     # Check if the dataframes are empty before writing
     if amendments_df is not None:
@@ -213,8 +265,8 @@ def output_freezing_files(
 def bring_together_split_cases(
     additions_df: pd.DataFrame,
     amendments_df: pd.DataFrame,
-    FreezingLogger: logging.Logger
-    ) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    FreezingLogger: logging.Logger,
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Checks for references in both the additions and amendments.
     If a reference is found in both: move all the relevant rows into
     amendments and remove from additions.

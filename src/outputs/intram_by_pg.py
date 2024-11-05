@@ -75,7 +75,7 @@ def output_intram_by_pg(
 
     # Outputting the CSV file with timestamp and run_id
     tdate = datetime.now().strftime("%y-%m-%d")
-    survey_year = config["years"]["survey_year"]
+    survey_year = config["survey"]["survey_year"]
     filename = (
         f"{survey_year}_output_intram_by_pg_{'uk' if uk_output else 'gb'}"
         f"_{tdate}_v{run_id}.csv"

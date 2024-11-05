@@ -48,7 +48,10 @@ class TestAggregateItl(object):
     @pytest.fixture(scope="module")
     def config(self) -> dict:
         config = {
-            "years": {"survey_year": 2022},
+            "survey": {
+                "survey_type": "BERD",
+                "survey_year": 2022
+            },
             "mappers": {
                 "geo_cols": ["ITL221CD", "ITL221NM", "ITL121CD", "ITL121NM"],
                 "gb_itl": "LAU121CD",

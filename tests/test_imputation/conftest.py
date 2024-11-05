@@ -7,7 +7,8 @@ import pytest
 def imputation_config() -> dict:
     """A dummy imputation config for running imputation tetsts."""
     config = {
-        "years": {
+        "survey": {
+            "survey_type": "BERD",
             "survey_year": 2023
         },
         "imputation": {

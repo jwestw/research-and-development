@@ -265,7 +265,7 @@ class TestCreateAdditionalNiCols(object):
 class TestValidateMappingFilenames(object):
     def test_validate_mapper_config_raises_file_incorrect(self):
         config = {
-            'years' : {'survey_year': 2022,},
+            'survey' : {'survey_year': 2022,},
             '2022_mappers': {
                 'mappers_version': "v1",
                 'itl_mapper_path': "itl_2022.cs",
@@ -286,7 +286,7 @@ class TestValidateMappingFilenames(object):
 
     def test_validate_mapper_config_raises_year_incorrect(self):
         config = {
-            'years' : {'survey_year': 2022,},
+            'survey' : {'survey_year': 2022,},
             '2022_mappers': {
                 'mappers_version': "v1",
                 'itl_mapper_path': "itl_202.csv",
@@ -307,7 +307,7 @@ class TestValidateMappingFilenames(object):
 
     def test_validate_mapper_config_raises_missing_file(self):
         config = {
-            'years' : {'survey_year': 2022,},
+            'survey' : {'survey_year': 2022,},
             '2022_mappers': {
                 'mappers_version': "v1",
                 'itl_mapper_path': "",
