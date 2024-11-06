@@ -85,7 +85,7 @@ def run_mapping(
     val.validate_many_to_one(sic_pg_num, "SIC 2007_CODE", "2016 > Form PG")
 
     # For survey year only 2022 it's necessary to update the reference list
-    year = config["years"]["survey_year"]
+    year = config["survey"]["survey_year"]
     if year == 2022:
         ref_list_817_mapper = stage_hlp.load_validate_mapper(
             "ref_list_817_mapper_path",
@@ -120,7 +120,7 @@ def run_mapping(
     # output QA files
     qa_path = config["mapping_paths"]["qa_path"]
     tdate = datetime.now().strftime("%y-%m-%d")
-    survey_year = config["years"]["survey_year"]
+    survey_year = config["survey"]["survey_year"]
 
     if config["global"]["output_mapping_qa"]:
         MappingMainLogger.info("Outputting Mapping QA files.")

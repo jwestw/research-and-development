@@ -41,7 +41,10 @@ def config():
             "freezing_amendments_path": "02_freezing/freezing_updates/updates.csv",
             "freezing_additions_path": "02_freezing/freezing_updates/additions.csv",
         },
-        "years": {"survey_year": 2022},
+        "survey": {
+            "survey_type": "BERD",
+            "survey_year": 2022
+        },
         "staging_paths": {
             "folder": "01_staging",
             "feather_output": "feather",
@@ -149,7 +152,7 @@ def test_create_staging_config(config, expected_staging_dict):
 
 def test_validate_snapshot_files_success(config, caplog):
     """Tests for staging_validation function."""
-    config = {'years' : {'survey_year': 2023,},
+    config = {'survey' : {'survey_year': 2023,},
               'global': {'platform': "network"},
               'network_paths': { 'root': "R:/DAP_emulation/",
               'snapshot_path': "/2023_snapshots/snapshot_file-202312.json",
@@ -166,7 +169,7 @@ def test_validate_snapshot_files_fail(config, caplog):
     """Tests for staging_validation function."""
     config = {
 
-        'years' : {'survey_year': 2023,},
+        'survey' : {'survey_year': 2023,},
               'global': {'platform': "network"},
               'network_paths': {'root': "R:/BERD Results System Development 2023/DAP_emulation/",
               'snapshot_path': "/ons/rdbe_dev/spp_snapshots/2023_snapshots/snapshot-20212-002-b9b6048a-51c9-4669-919a-e92fc6e9c433.json",
@@ -184,7 +187,7 @@ def test_validate_snapshot_files_success_blank(config, caplog):
     """Tests for staging_validation function."""
     config = {
 
-        'years' : {'survey_year': 2023,},
+        'survey' : {'survey_year': 2023,},
               'global': {'platform': "network"},
               'network_paths': {'root': "R:/BERD Results System Development 2023/DAP_emulation/",
               'snapshot_path': "/ons/rdbe_dev/spp_snapshots/2023_snapshots/snapshot-202312-002-b9b6048a-51c9-4669-919a-e92fc6e9c433.json",

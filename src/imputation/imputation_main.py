@@ -133,7 +133,7 @@ def run_imputation(
 
     # Output QA files
     tdate = datetime.now().strftime("%y-%m-%d")
-    survey_year = config["years"]["survey_year"]
+    survey_year = config["survey"]["survey_year"]
 
     if config["global"]["output_imputation_qa"]:
         ImputationMainLogger.info("Outputting Imputation QA files.")

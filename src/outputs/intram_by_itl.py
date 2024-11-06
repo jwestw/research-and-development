@@ -97,7 +97,7 @@ def aggregate_itl(
     Returns:
         Tuple[pd.DataFrame, pd.DataFrame]: The ITL1 and ITL2 dataframes.
     """
-    CURRENT_YEAR = config["years"]["survey_year"]
+    CURRENT_YEAR = config["survey"]["survey_year"]
     GEO_COLS = config["mappers"]["geo_cols"]
     BASE_COLS = ["postcodes_harmonised", "formtype", "211"]
     df = gb_df[GEO_COLS + BASE_COLS]
@@ -162,7 +162,7 @@ def output_intram_by_itl(
         save_detailed_csv(
             itl_df,
             output_dir,
-            config["years"]["survey_year"],
+            config["survey"]["survey_year"],
             f"output_intram_{area}_itl{i}",
             run_id,
             write_csv,

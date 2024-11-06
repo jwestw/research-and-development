@@ -70,15 +70,18 @@ def run_staging(  # noqa: C901
     # set up dictionaries with all the paths needed for the staging module
     staging_dict = config["staging_paths"]
 
-    stage_frozen_snapshot = config["global"]["run_with_snapshot"] | config["global"]["run_with_snapshot_and_freeze"]
+    stage_frozen_snapshot = (
+        config["global"]["run_with_snapshot"]
+        | config["global"]["run_with_snapshot_and_freeze"]
+    )
     stage_updated_snapshot = config["global"]["load_updated_snapshot_for_comparison"]
     if stage_frozen_snapshot or stage_updated_snapshot:
         feather_path = staging_dict["feather_output"]
 
         if stage_frozen_snapshot:
-            snapshot_name = os.path.basename(
-                staging_dict["snapshot_path"]
-            ).split(".", 1)[0]
+            snapshot_name = os.path.basename(staging_dict["snapshot_path"]).split(
+                ".", 1
+            )[0]
 
             feather_file = os.path.join(feather_path, f"{snapshot_name}.feather")
 
@@ -130,7 +133,7 @@ def run_staging(  # noqa: C901
             else:
                 StagingMainLogger.info("Checking data shape")
                 val.check_data_shape(full_responses, raise_error=True)
-                
+
             # Validate the postcodes in data loaded from JSON
             (
                 full_responses,
@@ -194,7 +197,9 @@ def run_staging(  # noqa: C901
         # Get the latest manual trim file
         manual_trim_path = staging_dict["manual_imp_trim_path"]
 
-        if config["global"]["load_manual_imputation"] and rd_file_exists(manual_trim_path):
+        if config["global"]["load_manual_imputation"] and rd_file_exists(
+            manual_trim_path
+        ):
             StagingMainLogger.info("Loading Imputation Manual Trimming File")
             manual_trim_df = rd_read_csv(manual_trim_path)
             manual_trim_df["manual_trim"] = manual_trim_df["manual_trim"].fillna(False)
@@ -245,7 +250,6 @@ def run_staging(  # noqa: C901
         )
 
         # seaparate PNP data from full_responses (BERD data)
-        # NOTE: PNP data can be output for QA but won't be further processed in the pipeline
         if stage_frozen_snapshot or stage_updated_snapshot:
             full_responses, pnp_full_responses = helpers.filter_pnp_data(full_responses)
 
@@ -253,7 +257,7 @@ def run_staging(  # noqa: C901
             StagingMainLogger.info("Starting output of staged BERD data...")
             staging_folder = staging_dict["staging_output_path"]
             tdate = datetime.now().strftime("%y-%m-%d")
-            survey_year = config["years"]["survey_year"]
+            survey_year = config["survey"]["survey_year"]
             staged_filename = (
                 f"{survey_year}_staged_BERD_full_responses_{tdate}_v{run_id}.csv"
             )
@@ -267,7 +271,7 @@ def run_staging(  # noqa: C901
             StagingMainLogger.info("Starting output of staged PNP data...")
             staging_folder = staging_dict["pnp_staging_qa_path"]
             tdate = datetime.now().strftime("%y-%m-%d")
-            survey_year = config["years"]["survey_year"]
+            survey_year = config["survey"]["survey_year"]
             staged_filename = (
                 f"{survey_year}_staged_PNP_full_responses_{tdate}_v{run_id}.csv"
             )
@@ -290,12 +294,12 @@ def run_staging(  # noqa: C901
 
     else:
         return (
-        full_responses,
-        pd.DataFrame(),
-        pd.DataFrame(),
-        pd.DataFrame(),
-        pd.DataFrame(),
-        pd.DataFrame(),
-        pd.DataFrame(),
-        pd.DataFrame(),
-    )
+            full_responses,
+            pd.DataFrame(),
+            pd.DataFrame(),
+            pd.DataFrame(),
+            pd.DataFrame(),
+            pd.DataFrame(),
+            pd.DataFrame(),
+            pd.DataFrame(),
+        )

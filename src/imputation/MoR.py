@@ -28,7 +28,7 @@ def run_mor(df, backdata, impute_vars, config):
         pd.DataFrame: QA DataFrame showing how imputation links are calculated.
     """
     # If the survey year is 2022, there is no shortform backdata
-    is_2022 = config["years"]["survey_year"] == 2022
+    is_2022 = config["survey"]["survey_year"] == 2022
 
     to_impute_df, remainder_df, backdata = mor_preprocessing(df, backdata, is_2022)
 

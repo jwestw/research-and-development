@@ -42,6 +42,6 @@ def output_intram_totals(
     OutputMainLogger.info(intram_tot_df)
 
     tdate = datetime.now().strftime("%y-%m-%d")
-    survey_year = config["years"]["survey_year"]
+    survey_year = config["survey"]["survey_year"]
     filename = f"{survey_year}_intram_totals_{tdate}_v{run_id}.csv"
     write_csv(f"{output_path}/output_intram_totals/{filename}", intram_tot_df)

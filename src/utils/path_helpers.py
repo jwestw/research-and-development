@@ -9,7 +9,7 @@ def get_paths(config: dict) -> dict:
     """Return either network_paths or hdfs_paths despending on the environment."""
     platform = config["global"]["platform"]
     paths = config[f"{platform}_paths"]
-    paths["year"] = config["years"]["survey_year"]
+    paths["year"] = config["survey"]["survey_year"]
     paths["berd_path"] = os.path.join(paths["root"], f"{paths['year']}_surveys/BERD/")
     paths["pnp_path"] = os.path.join(paths["root"], f"{paths['year']}_surveys/PNP/")
     return paths
@@ -44,7 +44,7 @@ def create_module_config(config: dict, module_name: str) -> dict:
 
 def snapshot_validation(config: dict) -> dict:
     paths = get_paths(config)
-    survey_year = str(config["years"]["survey_year"])
+    survey_year = str(config["survey"]["survey_year"])
     msg = ""
 
     if f"{survey_year}12" not in paths["snapshot_path"]:
@@ -234,7 +234,7 @@ def create_exports_config(config: dict) -> dict:
 
 
 def validate_mapping_filenames(config: dict) -> dict:
-    year = str(config["years"]["survey_year"])
+    year = str(config["survey"]["survey_year"])
     year_mapper_dict = config[f"{year}_mappers"]
     version = year_mapper_dict["mappers_version"]
     bool_dict = {}

@@ -145,7 +145,9 @@ def load_snapshot_feather(feather_file, read_feather):
 
 
 def load_val_snapshot_json(
-    snapshot_path: str, load_json: Callable, config: dict,
+    snapshot_path: str,
+    load_json: Callable,
+    config: dict,
 ) -> Tuple[pd.DataFrame, str]:
     """
     Loads and validates a snapshot of survey data from a JSON file.
@@ -180,9 +182,7 @@ def load_val_snapshot_json(
     StagingHelperLogger.info("Finished Data Ingest...")
 
     # Validate snapshot data
-    val.validate_data_with_schema(
-        contributors_df, "./config/contributors_schema.toml"
-    )
+    val.validate_data_with_schema(contributors_df, "./config/contributors_schema.toml")
     val.validate_data_with_schema(responses_df, "./config/long_response.toml")
 
     if config["global"]["platform"] == "s3" and config["global"]["dev_test"]:
@@ -300,10 +300,8 @@ def stage_validate_harmonise_postcodes(
     # Save the invalid postcodes to a CSV file
     pcodes_folder = staging_dict["pcode_val_path"]
     tdate = datetime.now().strftime("%y-%m-%d")
-    survey_year = config["years"]["survey_year"]
-    invalid_filename = (
-        f"{survey_year}_invalid_postcodes_{tdate}_v{run_id}.csv"
-    )
+    survey_year = config["survey"]["survey_year"]
+    invalid_filename = f"{survey_year}_invalid_postcodes_{tdate}_v{run_id}.csv"
     write_csv(f"{pcodes_folder}/{invalid_filename}", invalid_df)
 
     # Log the end of postcode validation

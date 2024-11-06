@@ -30,7 +30,7 @@ def output_intram_by_sic(
         intram_tot_dict (dict): Dictionary with the intramural totals.
     """
     output_path = config["outputs_paths"]["outputs_master"]
-    period = config["years"]["survey_year"]
+    period = config["survey"]["survey_year"]
 
     # Create sic_division column from rusic
     df["rusic_string"] = df["rusic"].astype(str).str.zfill(5)
@@ -92,7 +92,7 @@ def output_intram_by_sic(
 
     # Outputting the CSV file with timestamp and run_id
     tdate = datetime.now().strftime("%y-%m-%d")
-    survey_year = config["years"]["survey_year"]
+    survey_year = config["survey"]["survey_year"]
     filename = f"{survey_year}_output_intram_by_sic_{tdate}_v{run_id}.csv"
     write_csv(f"{output_path}/output_intram_by_sic/{filename}", df_selected)
 

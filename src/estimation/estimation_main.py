@@ -47,7 +47,7 @@ def run_estimation(
     if config["global"]["output_estimation_qa"]:
         EstMainLogger.info("Outputting estimation QA file.")
         tdate = datetime.now().strftime("%y-%m-%d")
-        survey_year = config["years"]["survey_year"]
+        survey_year = config["survey"]["survey_year"]
         est_qa_path = config["estimation_paths"]["qa_path"]
         cell_qa_filename = f"{survey_year}_estimation_weights_qa_{tdate}_v{run_id}.csv"
         full_qa_filename = f"{survey_year}_full_estimation_qa_{tdate}_v{run_id}.csv"
