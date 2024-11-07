@@ -1,0 +1,36 @@
+name: Code2Flow Call Graph Workflow
+
+on:
+  push:
+    branches: develop
+  pull_request:
+    branches: develop
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+        token: ${{ secrets.GH_TOKEN }}
+    - name: Install dependencies
+      run: |
+        pip3 install -r requirements.txt
+        pip3 install code2flowdiagram
+    - name: Run code2flow to create png flowchart
+      run: |
+        mkdir -p imgs
+        code2flowdiagram . -o imgs/pipeline_call_graph.png
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: pipeline-call-graph
+        path: imgs/pipeline_call_graph.png
