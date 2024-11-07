@@ -24,11 +24,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install code2flow
+        pip install code2flowdiagram
     - name: Run code2flow to create png flowchart
       run: |
         mkdir imgs
-        code2flow main.py -o imgs/pipeline_call_graph.png
+        code2flowdiagram . -o imgs/pipeline_call_graph.png
     - name: Configure Git
       run: |
         git config --global user.name 'github-actions[bot]'
