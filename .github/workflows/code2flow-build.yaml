@@ -1,4 +1,4 @@
-name: Code2Flow Call Graph Workflow
+name: code2flowdiagram Call Graph Workflow
 
 on:
   push:
@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.ref }}
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -25,7 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install code2flowdiagram
-    - name: Run code2flow to create png flowchart
+    - name: Run code2flowdiagram to create png flowchart
       run: |
         mkdir imgs
         code2flowdiagram . -o imgs/pipeline_call_graph.png
@@ -37,9 +39,9 @@ jobs:
       run: |
         git add imgs/pipeline_call_graph.png
         git commit -m "Update pipeline call graph"
-        git push
+        git push origin HEAD:${{ github.ref }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
